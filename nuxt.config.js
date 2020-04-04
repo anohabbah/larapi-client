@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -30,7 +31,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/APIConnector.js', '~/filters/date-for-human.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -43,6 +44,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/auth',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
@@ -52,7 +54,21 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    debug: process.env.APP_DEBUG
+  },
+  auth: {
+    strategies: {
+      'laravel.passport': {
+        url: process.env.APP_URL,
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET
+      }
+    }
+  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
