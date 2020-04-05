@@ -4,8 +4,7 @@ const INJECTED_KEY = 'api'
 
 export default (ctx, inject) => {
   const jsonApi = new DevourAPI({
-    apiUrl: process.env.API_URL,
-    bearer: process.env.ACCESS_TOKEN
+    apiUrl: process.env.API_URL
   })
 
   // console.log(process.env.ACCESS_TOKEN)
@@ -35,10 +34,6 @@ export default (ctx, inject) => {
       type: 'comments'
     }
   })
-
-  // ctx.$axios.setHeader('Accept', 'application/vnd.api+json')
-  // ctx.$axios.setHeader('Content-Type', 'application/vnd.api+json')
-  // ctx.$axios.setToken(process.env.ACCESS_TOKEN, 'Bearer')
 
   jsonApi.axios = ctx.$axios
   ctx[`$${INJECTED_KEY}`] = jsonApi

@@ -58,6 +58,12 @@ export default {
     debug: process.env.APP_DEBUG
   },
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/',
+      callback: '/callback'
+    },
     strategies: {
       'laravel.passport': {
         url: process.env.APP_URL,
@@ -66,9 +72,9 @@ export default {
       }
     }
   },
-  // router: {
-  //   middleware: ['auth']
-  // },
+  router: {
+    middleware: ['auth']
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
